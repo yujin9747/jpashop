@@ -10,7 +10,7 @@ public class Delevery {
     @Id @GeneratedValue
     @Column(name = "delevery_id")
     private Long id;
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order oder;
     @Embedded
     private Address address;

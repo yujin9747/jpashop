@@ -15,6 +15,7 @@ public class Order {
     @Id @GeneratedValue
     @Column(name = "order_id")
     private Long id;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -22,9 +23,12 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)    // Order만 호출해 주면, delivery까지 같이 persiste되도록.
+
     @JoinColumn(name = "delivery_id")
     private Delevery delivery;
+    
     private LocalDateTime orderDate;
+    
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;    // 주문 상태 [ORDER , CANCEL]
 

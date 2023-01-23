@@ -19,6 +19,7 @@ public class OrderItem {
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
+
     @JoinColumn(name = "item_id")
     private Item item;
     private int orderPrice; // 주문 당시 가격

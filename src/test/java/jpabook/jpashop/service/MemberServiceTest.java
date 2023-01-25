@@ -34,13 +34,13 @@ public class MemberServiceTest {
         member.setName("kim");
 
         // when
-        Long id = memberService.join(member);
+        Member getMember = memberService.join(member);
 
         // then
         /**em.flush(); 영속성 context 안에 있는 내용들을 쿼리를 보낸다.
          * 쿼리를 보고싶을 때 사용.
          * @RollBack(false)가 없으면 롤백은 그대로 진행.**/
-        assertEquals(member, memberRepository.findOne(id));
+        assertEquals(member, memberRepository.findOne(getMember.getId()));
     }
 
     @Test(expected = IllegalStateException.class)

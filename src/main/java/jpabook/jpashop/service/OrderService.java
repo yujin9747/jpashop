@@ -30,7 +30,7 @@ public class OrderService {
      * order만 참조해서 쓰는 경우(private owner), cascade All을 하면 좋음.
      * */
     @Transactional
-    public Long order(Long memberId, Long itemId, int count){
+    public Order order(Long memberId, Long itemId, int count){
         // 엔티티 조회
         Member member = memberRepository.findOne(memberId);
         Item item = itemRepository.findOne(itemId);
@@ -47,7 +47,7 @@ public class OrderService {
 
         // 주문 저장
         orderRepository.save(order);
-        return order.getId();
+        return order;
     }
 
     /**

@@ -18,10 +18,10 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional  // 조회가 아닌 서비스에서는 readonly=false가 기본인 transactional 어노테이션을 붙여야 한다.
-    public Long join(Member member){
+    public Member join(Member member){
         validateDuplicateMember(member);
         memberRepository.save(member);
-        return member.getId();
+        return member;
     }
 
     private void validateDuplicateMember(Member member) {

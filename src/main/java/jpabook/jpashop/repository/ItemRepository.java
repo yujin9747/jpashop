@@ -13,12 +13,14 @@ public class ItemRepository {
 
     private final EntityManager em;
 
-    public void save(Item item){
+    public Item save(Item item){
         if(item.getId() == null){   // 완전히 새로 생성한 객체인 경우, 신규 등록
             em.persist(item);
+            return item;
         }
         else {  // 디비에 등록한 객체를 가져와서 update한다고 생각하면 됨.
             em.merge(item);
+            return item;
         }
     }
 

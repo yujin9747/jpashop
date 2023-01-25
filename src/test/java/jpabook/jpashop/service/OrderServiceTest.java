@@ -37,10 +37,10 @@ public class OrderServiceTest {
 
         // when
         int orderCount = 2;
-        Long orderId = orderService.order(member.getId(), book.getId(), orderCount);
+        Order order = orderService.order(member.getId(), book.getId(), orderCount);
 
         // then
-        Order getOrder = orderRepository.findOne(orderId);
+        Order getOrder = orderRepository.findOne(order.getId());
         assertEquals("상품주문시 상태는 ORDER", OrderStatus.ORDER,  getOrder.getOrderStatus()); // 주문상태가 ORDER인지 확인
         assertEquals("주문한 상품 종류 수가 정확해야 한다", 1, getOrder.getOrderItems().size());
         assertEquals("주문가격은 가격*수량이다", 10000*orderCount, getOrder.getTotalPrice());
@@ -54,13 +54,13 @@ public class OrderServiceTest {
         Book book = createBook("jpa study", 10000, 10);
 
         int orderCount = 2;
-        Long orderId = orderService.order(member.getId(), book.getId(), orderCount);
+        Order order = orderService.order(member.getId(), book.getId(), orderCount);
 
         // when
-        orderService.cancelOrder(orderId);
+        orderService.cancelOrder(order.getId());
 
         // then
-        Order getOrder = orderRepository.findOne(orderId);
+        Order getOrder = orderRepository.findOne(order.getId());
         assertEquals("재고가 정상적으로 복구가 되어야 한다.", 10, book.getStockQuantity());
         assertEquals("주문 취소시 상태는 CANCEL", OrderStatus.CANCEL, getOrder.getOrderStatus());
     }
